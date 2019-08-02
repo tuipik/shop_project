@@ -1,13 +1,11 @@
 from django.db import models
 from datetime import datetime
-import re
+from django.utils.text import slugify
 from transliterate import translit
 
 
 def gen_slug(title):
-    tr = translit(title, 'ru', reversed=True)
-    reg = re.compile('[ ]').sub('-', tr.lower())
-    slug = re.compile('[^a-z-0-9]').sub('', reg)
+    slug = slugify(translit(title, 'ru', reversed=True))
     return slug
 
 
