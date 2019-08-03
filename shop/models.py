@@ -40,6 +40,11 @@ class Brand(models.Model):
         super().save(*args, **kwargs)
 
 
+class ProductManager(models.Manager):
+    def all(self, *args, **kwargs):
+        return super(ProductManager, self).get_queryset().filter(available=True)
+
+
 class Product(models.Model):
     category = models.ForeignKey(Category, db_index=True,
                                  on_delete=models.CASCADE,
@@ -54,6 +59,7 @@ class Product(models.Model):
     price = models.DecimalField(max_digits=9, decimal_places=2,
                                 blank=True)
     available = models.BooleanField(default=True)
+    objects = ProductManager()
 
     def __str__(self):
         return self.title
