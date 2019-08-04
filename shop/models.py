@@ -1,5 +1,6 @@
 from django.db import models
 from datetime import datetime
+from django.urls import reverse
 from django.utils.text import slugify
 from transliterate import translit
 
@@ -26,6 +27,10 @@ class Category(models.Model):
     def save(self, *args, **kwargs):
         self.slug = gen_slug(self.title)
         super().save(*args, **kwargs)
+
+    def get_absolute_url(self):
+        return reverse('category_detail', kwargs={'category_slug': self.slug})
+
 
 
 class Brand(models.Model):
@@ -68,6 +73,9 @@ class Product(models.Model):
         self.slug = gen_slug(self.title) + '-'\
                     + str(datetime.now().timestamp()).replace('.', '')
         super().save(*args, **kwargs)
+
+    def get_absolute_url(self):
+        return reverse('product_detail', kwargs={'product_slug': self.slug})
 
 
 
