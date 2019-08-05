@@ -4,9 +4,10 @@ from shop.models import *
 
 
 class ProductAdmin(admin.ModelAdmin):
-    list_display = ('title', 'brand', 'category', 'price', 'available')
+    list_display = ('title', 'brand', 'category', 'price', 'available',
+                    'for_promo')
     list_filter = ('brand', 'category', 'price', 'available')
-    list_editable = ('available',)
+    list_editable = ('available', 'for_promo')
 
 
 admin.site.register(Category)

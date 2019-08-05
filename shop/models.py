@@ -65,6 +65,7 @@ class Product(models.Model):
                                 blank=True)
     available = models.BooleanField(default=True)
     objects = ProductManager()
+    for_promo = models.BooleanField(default=False)
 
     def __str__(self):
         return self.title

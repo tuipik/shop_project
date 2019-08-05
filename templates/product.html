@@ -15,7 +15,15 @@
                 <br>
                 <p>Цена: <strong>{{ product.price }}</strong></p>
                 <a href="#">
-                    <button class="btn btn-danger">Добавить в корзину</button>
+                    {% if product.available %}
+                        <button class="btn btn-danger">Додати в корзину
+                        </button>
+                    {% else %}
+                        <button type="button" class="btn btn-dark"
+                                disabled>Немає в наявності
+                        </button>
+
+                    {% endif %}
                 </a>
             </div>
         </div>

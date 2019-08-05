@@ -6,11 +6,13 @@ def base_view(request):
     categories = Category.objects.all()
     brands = Brand.objects.all()
     products = Product.objects.all()
+    for_promo = Product.objects.filter(for_promo=True)
 
     context = {
         'categories': categories,
         'brands': brands,
-        'products': products
+        'products': products,
+        'for_promo': for_promo,
     }
 
     return render(request, 'base.html', context)
@@ -19,6 +21,7 @@ def base_view(request):
 def product_view(request, product_slug):
     product = Product.objects.get(slug=product_slug)
     categories = Category.objects.all()
+
     context = {
         'product': product,
         'categories': categories,
